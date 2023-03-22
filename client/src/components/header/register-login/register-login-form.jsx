@@ -22,7 +22,7 @@ export default function RegisterLoginForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="email">
+      <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" />
       </Form.Group>
