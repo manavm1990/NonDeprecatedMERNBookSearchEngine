@@ -1,3 +1,3 @@
 # 📚 Server
 
-![Dependency Graph]('./dependency-graph.svg')
+![Dependency Graph](./dependency-graph.svg)
