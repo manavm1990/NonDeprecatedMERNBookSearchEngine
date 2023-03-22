@@ -41,12 +41,13 @@ export default function BooksContainer({ foundBooks }) {
                 (currentUserBook) => currentUserBook.bookId === book.bookId
               )
             )}
-            handleClick={() => {
-              saveBook({
-                variables: {
-                  book,
-                },
-              });
+            handleClick={(action) => {
+              action === "SAVE_BOOK" &&
+                saveBook({
+                  variables: {
+                    book,
+                  },
+                });
             }}
           />
         </Col>

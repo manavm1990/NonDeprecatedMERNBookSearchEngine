@@ -24,7 +24,7 @@ export default function BookCard({ book, isSaved, handleClick }) {
         <Button
           variant={isSaved ? "warning" : "secondary"}
           className="float-end"
-          onClick={handleClick}
+          onClick={() => handleClick(isSaved ? "REMOVE_BOOK" : "SAVE_BOOK")}
         >
           {isSaved ? "Remove 🔥 from 📚" : "Save to 📚"}
         </Button>
