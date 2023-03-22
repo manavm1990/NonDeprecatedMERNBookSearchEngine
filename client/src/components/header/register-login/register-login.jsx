@@ -10,25 +10,25 @@ import RegisterLoginForm from "./register-login-form";
 export default function RegisterLogin({ isShowing, hide }) {
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const [login, { client: loginClient, error: loginError }] = useMutation(
-    LOGIN,
-    {
+  const [login, { client: loginClient, error: loginError, reset: loginReset }] =
+    useMutation(LOGIN, {
       onCompleted(data) {
         localStorage.setItem("token", data.login.token);
         hide();
         loginClient.resetStore();
       },
-    }
-  );
-
-  const [register, { client: registerClient, error: registerError }] =
-    useMutation(REGISTER, {
-      onCompleted(data) {
-        localStorage.setItem("token", data.createUser.token);
-        hide();
-        registerClient.resetStore();
-      },
     });
+
+  const [
+    register,
+    { client: registerClient, error: registerError, reset: registerReset },
+  ] = useMutation(REGISTER, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.createUser.token);
+      hide();
+      registerClient.resetStore();
+    },
+  });
 
   return (
     <Modal
@@ -50,6 +50,10 @@ export default function RegisterLogin({ isShowing, hide }) {
           isRegistering={isRegistering}
           login={login}
           register={register}
+          handleFocus={() => {
+            loginReset();
+            registerReset();
+          }}
         />
         {loginError && <Error error={loginError} />}
         {registerError && <Error error={registerError} />}

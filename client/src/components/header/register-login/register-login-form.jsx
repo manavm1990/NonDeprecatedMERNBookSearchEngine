@@ -2,7 +2,12 @@ import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export default function RegisterLoginForm({ isRegistering, register, login }) {
+export default function RegisterLoginForm({
+  isRegistering,
+  register,
+  login,
+  handleFocus,
+}) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -18,7 +23,7 @@ export default function RegisterLoginForm({ isRegistering, register, login }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} onFocus={handleFocus}>
       {isRegistering && (
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -53,4 +58,5 @@ RegisterLoginForm.propTypes = {
   isRegistering: PropTypes.bool,
   register: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  handleFocus: PropTypes.func.isRequired,
 };
