@@ -41,7 +41,12 @@ export default function App() {
             ? `${data.currentUser.username} Has ${data.currentUser.books.length} Saved Books`
             : "Login or Register to Start Saving 📚"}
         </h2>
-        {foundBooks.length ? <BooksDisplay foundBooks={foundBooks} /> : null}
+        {!isSavedOnlyMode && foundBooks.length ? (
+          <BooksDisplay foundBooks={foundBooks} />
+        ) : null}
+        {isSavedOnlyMode && data?.currentUser?.books.length ? (
+          <BooksDisplay foundBooks={data.currentUser.books} />
+        ) : null}
       </Container>
     </AuthContext.Provider>
   );
