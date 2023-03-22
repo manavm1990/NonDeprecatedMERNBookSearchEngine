@@ -8,7 +8,7 @@ const controller = {
       return createdUser.authenticate(newUser.password);
     } catch (error) {
       if (error.code === 11000) {
-        throw new Error("Username already exists");
+        throw new Error("Username/email already exists");
       }
     }
   },
