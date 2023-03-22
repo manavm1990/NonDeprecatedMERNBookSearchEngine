@@ -8,7 +8,7 @@ import Stack from "react-bootstrap/esm/Stack";
 import RegisterLogin from "./register-login/register-login";
 import SearchBar from "./search-bar";
 
-export default function Header({ handleSearch }) {
+export default function Header({ disableSearch, handleSearch, handleSwitch }) {
   const [isShowingRegisterLogin, setIsShowingRegisterLogin] = useState(false);
   const currentUser = useContext(AuthContext);
 
@@ -37,16 +37,21 @@ export default function Header({ handleSearch }) {
             </Button>
           )}
         </Stack>
-        <SearchBar handleSubmit={handleSearch} />
 
-        <Form className="d-flex justify-content-center mt-4 mb-2 border-top pt-3">
-          <Form.Check
-            type="switch"
-            id="nav-switch"
-            label="Only show my saved books"
-            className="text-white"
-          />
-        </Form>
+        {/* ⚠️ Prop Drilling */}
+        <SearchBar handleSubmit={handleSearch} disabled={disableSearch} />
+
+        {currentUser && (
+          <Form className="d-flex justify-content-center mt-4 mb-2 border-top pt-3">
+            <Form.Check
+              type="switch"
+              id="nav-switch"
+              label="Only show my saved books"
+              className="text-white"
+              onChange={handleSwitch}
+            />
+          </Form>
+        )}
       </Container>
 
       <RegisterLogin
@@ -59,6 +64,12 @@ export default function Header({ handleSearch }) {
   );
 }
 
+Header.defaultProps = {
+  disableSearch: false,
+};
+
 Header.propTypes = {
+  disableSearch: PropTypes.bool,
   handleSearch: PropTypes.func.isRequired,
+  handleSwitch: PropTypes.func.isRequired,
 };

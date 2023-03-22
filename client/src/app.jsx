@@ -10,6 +10,7 @@ import { normalizeBook } from "./utils";
 
 export default function App() {
   const [foundBooks, setFoundBooks] = useState([]);
+  const [isSavedOnlyMode, setIsSavedOnlyMode] = useState(false);
 
   const { data } = useQuery(CURRENT_USER);
 
@@ -26,7 +27,13 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={data?.currentUser}>
-      <Header handleSearch={handleSearch} />
+      <Header
+        disableSearch={isSavedOnlyMode}
+        handleSearch={handleSearch}
+        handleSwitch={() => {
+          setIsSavedOnlyMode((prev) => !prev);
+        }}
+      />
       <Container className="my-4" as="main">
         <h2 className="my-4">
           📚{" "}
