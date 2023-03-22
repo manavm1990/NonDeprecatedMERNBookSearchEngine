@@ -13,7 +13,7 @@ export default function BookCard({ book, isSaved, currentUser, handleClick }) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item className="fw-bold">Authors:</ListGroup.Item>
-        {book.authors.map((author) => (
+        {book.authors?.map((author) => (
           <ListGroup.Item key={author}>{author}</ListGroup.Item>
         ))}
       </ListGroup>
