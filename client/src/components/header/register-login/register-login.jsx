@@ -1,3 +1,5 @@
+import { LOGIN, REGISTER } from "@/schema/type-defs";
+import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
@@ -6,6 +8,22 @@ import RegisterLoginForm from "./register-login-form";
 
 export default function RegisterLogin({ isShowing, hide }) {
   const [isRegistering, setIsRegistering] = useState(false);
+
+  const [login, { client }] = useMutation(LOGIN, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.login.token);
+      hide();
+      client.resetStore();
+    },
+  });
+
+  const [register] = useMutation(REGISTER, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.createUser.token);
+      hide();
+      client.resetStore();
+    },
+  });
 
   return (
     <Modal
@@ -23,7 +41,11 @@ export default function RegisterLogin({ isShowing, hide }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <RegisterLoginForm isRegistering={isRegistering} />
+        <RegisterLoginForm
+          isRegistering={isRegistering}
+          login={login}
+          register={register}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button

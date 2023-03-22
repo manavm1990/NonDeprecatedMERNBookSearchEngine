@@ -1,24 +1,8 @@
-import { LOGIN, REGISTER } from "@/schema/type-defs";
-import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export default function RegisterLoginForm({ isRegistering }) {
-  const [login] = useMutation(LOGIN, {
-    onCompleted(data) {
-      localStorage.setItem("token", data.login.token);
-      window.location.assign("/");
-    },
-  });
-
-  const [register] = useMutation(REGISTER, {
-    onCompleted(data) {
-      localStorage.setItem("token", data.createUser.token);
-      window.location.assign("/");
-    },
-  });
-
+export default function RegisterLoginForm({ isRegistering, register, login }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -67,4 +51,6 @@ RegisterLoginForm.defaultProps = {
 
 RegisterLoginForm.propTypes = {
   isRegistering: PropTypes.bool,
+  register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
