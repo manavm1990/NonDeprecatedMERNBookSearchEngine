@@ -1,16 +1,16 @@
-import SearchBar from "./search-bar";
+import PropTypes from "prop-types";
 import Navigation from "./navigation/navigation";
+import SearchBar from "./search-bar";
 
-export default function Header() {
+export default function Header({ handleSearch }) {
   return (
     <header className="bg-dark pt-5 pb-3">
       <Navigation />
-      <SearchBar
-        handleSubmit={(e) => {
-          e.preventDefault();
-          console.log(e.target.search.value);
-        }}
-      />
+      <SearchBar handleSubmit={handleSearch} />
     </header>
   );
 }
+
+Header.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
+};
