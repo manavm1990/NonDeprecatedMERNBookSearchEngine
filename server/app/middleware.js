@@ -15,12 +15,10 @@ export const decodeToken = (req, _, next) => {
     }
   } catch (err) {
     console.error(err.message);
+  } finally {
+    // Set the user to the decoded token's data
+    req.user = decodedToken?.data;
 
     next();
   }
-
-  // Set the user to the decoded token's data
-  req.user = decodedToken?.data;
-
-  next();
 };
