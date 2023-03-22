@@ -10,6 +10,7 @@
     "dep-graph": "depcruise --exclude \"^node_modules\" --output-type dot src | dot -T svg > dependency-graph.svg"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.10",
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
