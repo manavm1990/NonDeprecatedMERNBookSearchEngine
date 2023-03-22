@@ -12,6 +12,7 @@ export default function BookCard({ book }) {
         <Card.Text>{book.description}</Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">
+        <ListGroup.Item className="fw-bold">Authors:</ListGroup.Item>
         {book.authors.map((author) => (
           <ListGroup.Item key={author}>{author}</ListGroup.Item>
         ))}
