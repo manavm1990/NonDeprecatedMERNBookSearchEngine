@@ -22,3 +22,13 @@ export const CURRENT_USER = gql`
     }
   }
 `;
+
+export const SAVE_BOOK = gql`
+  mutation SaveBook($book: BookInput!) {
+    saveBook(book: $book) {
+      bookId
+      title
+      userId
+    }
+  }
+`;
