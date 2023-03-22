@@ -14,7 +14,7 @@ export const decodeUserFromToken = () => {
 };
 
 // 'Translate' Google Books API response to our 📖
-export const normalizeBook = (book) => {
+export const normalizeBook = (googleBook) => {
   const {
     id: bookId,
     selfLink: link,
@@ -24,7 +24,7 @@ export const normalizeBook = (book) => {
       description,
       imageLinks: { thumbnail: image },
     },
-  } = book;
+  } = googleBook;
 
   return {
     authors,
