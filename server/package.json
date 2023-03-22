@@ -5,13 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dep-graph": "depcruise --exclude \"^node_modules\" --output-type dot app | dot -T svg > dependency-graph.svg"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "^3.16.1",
+    "dependency-cruiser": "^12.11.0",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-config-standard": "^17.0.0",
