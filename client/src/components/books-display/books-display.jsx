@@ -62,6 +62,7 @@ export default function BooksContainer({ foundBooks }) {
                 (currentUserBook) => currentUserBook.bookId === book.bookId
               )
             )}
+            currentUser={currentUser}
             handleClick={(action) => {
               switch (action) {
                 case "SAVE_BOOK":

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
-export default function BookCard({ book, isSaved, handleClick }) {
+export default function BookCard({ book, isSaved, currentUser, handleClick }) {
   return (
     <Card>
       <Card.Img variant="top" src={book.image} />
@@ -21,13 +21,15 @@ export default function BookCard({ book, isSaved, handleClick }) {
         <Card.Link href={book.link} target="_blank" rel="noopener">
           View Details on Google 📚
         </Card.Link>
-        <Button
-          variant={isSaved ? "warning" : "secondary"}
-          className="float-end"
-          onClick={() => handleClick(isSaved ? "REMOVE_BOOK" : "SAVE_BOOK")}
-        >
-          {isSaved ? "Remove 🔥 from 📚" : "Save to 📚"}
-        </Button>
+        {currentUser && (
+          <Button
+            variant={isSaved ? "warning" : "secondary"}
+            className="float-end"
+            onClick={() => handleClick(isSaved ? "REMOVE_BOOK" : "SAVE_BOOK")}
+          >
+            {isSaved ? "Remove 🔥 from 📚" : "Save to 📚"}
+          </Button>
+        )}
       </Card.Body>
     </Card>
   );
@@ -48,5 +50,8 @@ BookCard.propTypes = {
     title: PropTypes.string,
   }).isRequired,
   isSaved: PropTypes.bool,
+
+  // Just using this for a Boolean check
+  currentUser: PropTypes.object,
   handleClick: PropTypes.func.isRequired,
 };

@@ -28,7 +28,12 @@ export default function App() {
     <AuthContext.Provider value={data?.currentUser}>
       <Header handleSearch={handleSearch} />
       <Container className="my-4" as="main">
-        <h2>📚</h2>
+        <h2 className="my-4">
+          📚{" "}
+          {data?.currentUser
+            ? `${data.currentUser.username} Has ${data.currentUser.books.length} Saved Books`
+            : "Login or Register to Start Saving 📚"}
+        </h2>
         {foundBooks.length ? <BooksDisplay foundBooks={foundBooks} /> : null}
       </Container>
     </AuthContext.Provider>
