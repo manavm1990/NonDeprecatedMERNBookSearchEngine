@@ -3,10 +3,9 @@ import Alert from "react-bootstrap/Alert";
 
 export default function Error({ error }) {
   return (
-    <Alert variant="danger">
+    <Alert variant="danger" className="my-4">
       <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
       <p>{error.message}</p>
-      <hr />
       <p className="mb-0">{error.code}</p>
     </Alert>
   );

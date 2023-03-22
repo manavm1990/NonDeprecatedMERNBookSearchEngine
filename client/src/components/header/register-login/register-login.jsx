@@ -1,3 +1,4 @@
+import Error from "@/components/error";
 import { LOGIN, REGISTER } from "@/schema/type-defs";
 import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
@@ -9,21 +10,25 @@ import RegisterLoginForm from "./register-login-form";
 export default function RegisterLogin({ isShowing, hide }) {
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const [login, { client }] = useMutation(LOGIN, {
-    onCompleted(data) {
-      localStorage.setItem("token", data.login.token);
-      hide();
-      client.resetStore();
-    },
-  });
+  const [login, { client: loginClient, error: loginError }] = useMutation(
+    LOGIN,
+    {
+      onCompleted(data) {
+        localStorage.setItem("token", data.login.token);
+        hide();
+        loginClient.resetStore();
+      },
+    }
+  );
 
-  const [register] = useMutation(REGISTER, {
-    onCompleted(data) {
-      localStorage.setItem("token", data.createUser.token);
-      hide();
-      client.resetStore();
-    },
-  });
+  const [register, { client: registerClient, error: registerError }] =
+    useMutation(REGISTER, {
+      onCompleted(data) {
+        localStorage.setItem("token", data.createUser.token);
+        hide();
+        registerClient.resetStore();
+      },
+    });
 
   return (
     <Modal
@@ -46,6 +51,8 @@ export default function RegisterLogin({ isShowing, hide }) {
           login={login}
           register={register}
         />
+        {loginError && <Error error={loginError} />}
+        {registerError && <Error error={registerError} />}
       </Modal.Body>
       <Modal.Footer>
         <Button
