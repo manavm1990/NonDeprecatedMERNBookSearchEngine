@@ -40,8 +40,7 @@ BookCard.defaultProps = {
 };
 
 BookCard.propTypes = {
-  // 'normalizeBook' returns a 📖
-  book: PropTypes.exact({
+  book: PropTypes.shape({
     authors: PropTypes.arrayOf(PropTypes.string),
     bookId: PropTypes.string,
     description: PropTypes.string,

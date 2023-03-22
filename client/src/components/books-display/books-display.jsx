@@ -1,5 +1,6 @@
 import AuthContext from "@/context";
-import { CURRENT_USER, REMOVE_BOOK, SAVE_BOOK } from "@/schema/type-defs";
+import { REMOVE_BOOK, SAVE_BOOK } from "@/schema/mutations";
+import { CURRENT_USER } from "@/schema/queries";
 import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
 import { useContext } from "react";
@@ -92,9 +93,8 @@ export default function BooksContainer({ foundBooks }) {
 }
 
 BooksContainer.propTypes = {
-  // 'normalizeBook' returns a 📖
   foundBooks: PropTypes.arrayOf(
-    PropTypes.exact({
+    PropTypes.shape({
       authors: PropTypes.arrayOf(PropTypes.string),
       bookId: PropTypes.string,
       description: PropTypes.string,
