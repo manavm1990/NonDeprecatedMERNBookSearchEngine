@@ -2,10 +2,10 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import { index } from "./api";
-import BooksDisplay from "./components/books-display/books-display";
+import BooksContainer from "./components/books-container/books-container";
 import Header from "./components/header/header";
 import AuthContext from "./context";
-import { CURRENT_USER } from "./schema/type-defs";
+import { CURRENT_USER } from "./schema/queries";
 import { normalizeBook } from "./utils";
 
 export default function App() {
@@ -42,10 +42,10 @@ export default function App() {
             : "Login or Register to Start Saving 📚"}
         </h2>
         {!isSavedOnlyMode && foundBooks.length ? (
-          <BooksDisplay foundBooks={foundBooks} />
+          <BooksContainer foundBooks={foundBooks} />
         ) : null}
         {isSavedOnlyMode && data?.currentUser?.books.length ? (
-          <BooksDisplay foundBooks={data.currentUser.books} />
+          <BooksContainer foundBooks={data.currentUser.books} />
         ) : null}
       </Container>
     </AuthContext.Provider>
