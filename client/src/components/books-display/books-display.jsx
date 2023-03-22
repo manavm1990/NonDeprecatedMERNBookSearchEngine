@@ -1,5 +1,5 @@
 import AuthContext from "@/context";
-import { CURRENT_USER, SAVE_BOOK } from "@/schema/type-defs";
+import { CURRENT_USER, REMOVE_BOOK, SAVE_BOOK } from "@/schema/type-defs";
 import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
 import { useContext } from "react";
@@ -29,6 +29,27 @@ export default function BooksContainer({ foundBooks }) {
     },
   });
 
+  const [removeBook] = useMutation(REMOVE_BOOK, {
+    // When the mutation is successful, update the cache
+    update(cache, { data: { removeBook } }) {
+      // Read the data from the cache for this query.
+      const { currentUser } = cache.readQuery({ query: CURRENT_USER });
+
+      // Write the data back to the cache.
+      cache.writeQuery({
+        query: CURRENT_USER,
+        data: {
+          currentUser: {
+            ...currentUser,
+            books: currentUser.books.filter(
+              (book) => book.bookId !== removeBook.bookId
+            ),
+          },
+        },
+      });
+    },
+  });
+
   return (
     <Row xs={1} md={3} className="g-4">
       {foundBooks.map((book) => (
@@ -42,12 +63,25 @@ export default function BooksContainer({ foundBooks }) {
               )
             )}
             handleClick={(action) => {
-              action === "SAVE_BOOK" &&
-                saveBook({
-                  variables: {
-                    book,
-                  },
-                });
+              switch (action) {
+                case "SAVE_BOOK":
+                  saveBook({
+                    variables: {
+                      book,
+                    },
+                  });
+                  break;
+                case "REMOVE_BOOK":
+                  removeBook({
+                    variables: {
+                      bookId: book.bookId,
+                    },
+                  });
+                  break;
+                default:
+                  // TODO: Add Error toast?
+                  throw new Error("Invalid action");
+              }
             }}
           />
         </Col>

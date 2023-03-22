@@ -31,6 +31,24 @@ export const SAVE_BOOK = gql`
       bookId
       title
       userId
+      authors
+      description
+      image
+      link
+    }
+  }
+`;
+
+export const REMOVE_BOOK = gql`
+  mutation RemoveBook($bookId: ID!) {
+    removeBook(bookId: $bookId) {
+      userId
+      title
+      bookId
+      authors
+      description
+      image
+      link
     }
   }
 `;
