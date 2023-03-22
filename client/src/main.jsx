@@ -6,7 +6,28 @@ import App from "./app";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      User: {
+        fields: {
+          books: {
+            merge(existing = [], incoming) {
+              /**
+               * When removing a 📖, we get a ⚠️ b/c caching cannot determine identical 📖s.
+               * Not all of the 📖 fields are uniquely identifiable 🤷🏾‍♀️.
+               *
+               * `incoming` is the update array of 📚s with a 📖 removed.
+               *
+               * We tell the cache to use this `incoming` array of 📚s.
+               * https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function
+               */
+              return [...incoming];
+            },
+          },
+        },
+      },
+    },
+  }),
   headers: {
     authorization: `Bearer ${localStorage.getItem("token") || ""}`,
   },
