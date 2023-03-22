@@ -1,11 +1,11 @@
+import AuthContext from "@/context";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 
-export default function LoginStatus({
-  currentUser,
-  handleShowLogin,
-  handleLogout,
-}) {
+export default function LoginStatus({ handleShowLogin, handleLogout }) {
+  const currentUser = useContext(AuthContext);
+
   return currentUser ? (
     <>
       Signed in as: {currentUser.username}
@@ -19,7 +19,6 @@ export default function LoginStatus({
 }
 
 LoginStatus.propTypes = {
-  currentUser: PropTypes.object,
   handleShowLogin: PropTypes.func.isRequired,
   handleLogout: PropTypes.func.isRequired,
 };

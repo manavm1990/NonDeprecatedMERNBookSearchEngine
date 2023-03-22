@@ -1,5 +1,3 @@
-import { CURRENT_USER } from "@/schema/type-defs";
-import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,8 +6,6 @@ import RegisterLogin from "./register-login/register-login";
 
 export default function Navigation() {
   const [isShowingRegisterLogin, setIsShowingRegisterLogin] = useState(false);
-
-  const { data } = useQuery(CURRENT_USER);
 
   return (
     <>
@@ -22,7 +18,6 @@ export default function Navigation() {
           <Navbar.Collapse className="justify-content-end" id="nav">
             <Navbar.Text className="text-white">
               <LoginStatus
-                currentUser={data?.currentUser}
                 handleShowLogin={() => setIsShowingRegisterLogin(true)}
                 handleLogout={() => {
                   localStorage.removeItem("token");
