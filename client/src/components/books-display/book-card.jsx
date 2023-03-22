@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
-export default function BookCard({ book }) {
+export default function BookCard({ book, isSaved }) {
   return (
     <Card>
       <Card.Img variant="top" src={book.image} />
@@ -21,13 +21,17 @@ export default function BookCard({ book }) {
         <Card.Link href={book.link} target="_blank" rel="noopener">
           View Details on Google 📚
         </Card.Link>
-        <Button variant="secondary" className="float-end">
+        <Button variant="secondary" className="float-end" disabled={isSaved}>
           Save to 📚
         </Button>
       </Card.Body>
     </Card>
   );
 }
+
+BookCard.defaultProps = {
+  isSaved: false,
+};
 
 BookCard.propTypes = {
   // 'normalizeBook' returns a 📖
@@ -38,5 +42,6 @@ BookCard.propTypes = {
     image: PropTypes.string,
     link: PropTypes.string,
     title: PropTypes.string,
-  }),
+  }).isRequired,
+  isSaved: PropTypes.bool,
 };
