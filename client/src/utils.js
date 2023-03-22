@@ -12,3 +12,26 @@ export const decodeUserFromToken = () => {
       decoded.user
     : null;
 };
+
+// 'Translate' Google Books API response to our 📖
+export const normalizeBook = (book) => {
+  const {
+    id: bookId,
+    volumeInfo: {
+      title,
+      authors,
+      description,
+      imageLinks: { thumbnail: image },
+      selfLink: link,
+    },
+  } = book;
+
+  return {
+    authors,
+    bookId,
+    description,
+    image,
+    link,
+    title,
+  };
+};
