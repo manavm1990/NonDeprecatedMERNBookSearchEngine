@@ -41,7 +41,7 @@ export default function Header({ disableSearch, handleSearch, handleSwitch }) {
         {/* ⚠️ Prop Drilling */}
         <SearchBar handleSubmit={handleSearch} disabled={disableSearch} />
 
-        {currentUser && (
+        {currentUser?.books.length ? (
           <Form className="d-flex justify-content-center mt-4 mb-2 border-top pt-3">
             <Form.Check
               type="switch"
@@ -51,7 +51,7 @@ export default function Header({ disableSearch, handleSearch, handleSwitch }) {
               onChange={handleSwitch}
             />
           </Form>
-        )}
+        ) : null}
       </Container>
 
       <RegisterLogin
