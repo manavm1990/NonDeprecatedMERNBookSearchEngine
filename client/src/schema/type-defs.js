@@ -52,3 +52,11 @@ export const REMOVE_BOOK = gql`
     }
   }
 `;
+
+export const REGISTER = gql`
+  mutation CreateUser($user: UserInput) {
+    createUser(user: $user) {
+      token
+    }
+  }
+`;

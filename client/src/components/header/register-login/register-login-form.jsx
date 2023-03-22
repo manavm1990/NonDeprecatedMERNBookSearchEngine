@@ -1,4 +1,4 @@
-import { LOGIN } from "@/schema/type-defs";
+import { LOGIN, REGISTER } from "@/schema/type-defs";
 import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
@@ -12,13 +12,25 @@ export default function RegisterLoginForm({ isRegistering }) {
     },
   });
 
+  const [register] = useMutation(REGISTER, {
+    onCompleted(data) {
+      localStorage.setItem("token", data.createUser.token);
+      window.location.assign("/");
+    },
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const username = form.elements.username.value;
     const password = form.elements.password.value;
 
-    login({ variables: { username, password } });
+    if (isRegistering) {
+      const email = form.elements.email.value;
+      register({ variables: { user: { username, email, password } } });
+    } else {
+      login({ variables: { username, password } });
+    }
   };
 
   return (
@@ -26,18 +38,18 @@ export default function RegisterLoginForm({ isRegistering }) {
       {isRegistering && (
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <Form.Control type="email" />
+          <Form.Control type="email" required={isRegistering} />
         </Form.Group>
       )}
 
       <Form.Group className="mb-3" controlId="username">
         <Form.Label>Username</Form.Label>
-        <Form.Control type="text" />
+        <Form.Control type="text" required />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" />
+        <Form.Control type="password" required />
       </Form.Group>
 
       <div className="d-flex justify-content-between">
