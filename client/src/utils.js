@@ -17,12 +17,12 @@ export const decodeUserFromToken = () => {
 export const normalizeBook = (book) => {
   const {
     id: bookId,
+    selfLink: link,
     volumeInfo: {
       title,
       authors,
       description,
       imageLinks: { thumbnail: image },
-      selfLink: link,
     },
   } = book;
 
