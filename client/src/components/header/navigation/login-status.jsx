@@ -7,12 +7,9 @@ export default function LoginStatus({ handleShowLogin, handleLogout }) {
   const currentUser = useContext(AuthContext);
 
   return currentUser ? (
-    <>
-      Signed in as: {currentUser.username}
-      <Button variant="danger" className="ms-2" onClick={handleLogout}>
-        Logout
-      </Button>
-    </>
+    <Button variant="danger" className="ms-2" onClick={handleLogout}>
+      Logout
+    </Button>
   ) : (
     <Button onClick={handleShowLogin}>Login/Register</Button>
   );
