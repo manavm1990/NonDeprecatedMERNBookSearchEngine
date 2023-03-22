@@ -7,6 +7,7 @@ export default function RegisterLoginForm() {
   const [login] = useMutation(LOGIN, {
     onCompleted(data) {
       localStorage.setItem("token", data.login.token);
+      window.location.assign("/");
     },
   });
 
@@ -16,7 +17,6 @@ export default function RegisterLoginForm() {
     const username = form.elements.email.value;
     const password = form.elements.password.value;
 
-    console.log("sending out", username, password);
     login({ variables: { username, password } });
   };
 

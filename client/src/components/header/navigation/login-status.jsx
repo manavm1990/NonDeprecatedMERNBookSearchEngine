@@ -1,20 +1,25 @@
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 
-export default function LoginStatus({ currentUser, handleClick }) {
+export default function LoginStatus({
+  currentUser,
+  handleShowLogin,
+  handleLogout,
+}) {
   return currentUser ? (
     <>
       Signed in as: {currentUser.username}
-      <Button variant="danger" className="ms-2">
+      <Button variant="danger" className="ms-2" onClick={handleLogout}>
         Logout
       </Button>
     </>
   ) : (
-    <Button onClick={handleClick}>Login/Register</Button>
+    <Button onClick={handleShowLogin}>Login/Register</Button>
   );
 }
 
 LoginStatus.propTypes = {
   currentUser: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
+  handleShowLogin: PropTypes.func.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 };

@@ -21,12 +21,14 @@ export default function Navigation() {
           <Navbar.Toggle aria-controls="nav" />
           <Navbar.Collapse className="justify-content-end" id="nav">
             <Navbar.Text className="text-white">
-              {data?.currentUser && (
-                <LoginStatus
-                  currentUser={data.currentUser}
-                  handleClick={() => setIsShowingRegisterLogin(true)}
-                />
-              )}
+              <LoginStatus
+                currentUser={data?.currentUser}
+                handleShowLogin={() => setIsShowingRegisterLogin(true)}
+                handleLogout={() => {
+                  localStorage.removeItem("token");
+                  window.location.assign("/");
+                }}
+              />
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
