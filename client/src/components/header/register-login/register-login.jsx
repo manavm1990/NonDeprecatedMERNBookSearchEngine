@@ -1,5 +1,5 @@
 import Error from "@/components/error";
-import { LOGIN, REGISTER } from "@/schema/type-defs";
+import { LOGIN, REGISTER } from "@/schema/mutations";
 import { useMutation } from "@apollo/client";
 import PropTypes from "prop-types";
 import { useState } from "react";
