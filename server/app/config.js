@@ -11,6 +11,6 @@ export default {
     process.env.NODE_ENV === "production"
       ? process.env.MONGO_URL
       : "mongodb://localhost:27017/books",
-  port: process.env.PORT || 4000,
+  port: Number.parseInt(process.env.PORT) || 4000,
   saltRounds: process.env.SALT_ROUNDS || 10,
 };
