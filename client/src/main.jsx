@@ -11,7 +11,7 @@ import ReactDOM from "react-dom/client";
 import App from "./app";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000",
+  uri: import.meta.env.VITE_LIVE_APOLLO_SERVER || "http://localhost:4000",
 });
 
 const authLink = setContext((_, { headers }) => {
