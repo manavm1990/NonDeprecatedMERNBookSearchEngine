@@ -1,5 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import CartDetails from "./cart-details";
+import PropTypes from "prop-types";
 
 export default function Cart({ isShowing, hide }) {
   return (
@@ -13,7 +15,7 @@ export default function Cart({ isShowing, hide }) {
         <Modal.Title id="contained-modal-title-vcenter">Your Cart</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>🛒 Your cart is empty.</p>
+        <CartDetails />
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={hide}>Close</Button>
@@ -21,3 +23,12 @@ export default function Cart({ isShowing, hide }) {
     </Modal>
   );
 }
+
+Cart.defaultProps = {
+  isShowing: false,
+};
+
+Cart.propTypes = {
+  isShowing: PropTypes.bool,
+  hide: PropTypes.func.isRequired,
+};
