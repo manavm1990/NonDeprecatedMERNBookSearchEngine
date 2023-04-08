@@ -33,6 +33,7 @@ export default function Header({ disableSearch, handleSearch, handleSwitch }) {
                 variant="danger"
                 onClick={() => {
                   localStorage.removeItem("token");
+                  localStorage.removeItem("cart");
                   window.location.assign("/");
                 }}
               >

@@ -34,7 +34,9 @@ export default function BookCard({ book, isSaved, currentUser, handleClick }) {
             <Button
               variant="success"
               className="float-start"
-              onClick={() => dispatch({ type: "ADD_BOOK", payload: book })}
+              onClick={() => {
+                dispatch({ type: "ADD_BOOK", payload: book });
+              }}
             >
               {quantityInCart
                 ? `${quantityInCart} in cart 🛒`

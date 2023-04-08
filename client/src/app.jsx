@@ -35,7 +35,12 @@ export default function App() {
       {/* useContext-useReducer Pattern
       https://youtu.be/0lRBj54zuK0
       */}
-      <CartContext.Provider value={useReducer(cartReducer, [])}>
+      <CartContext.Provider
+        value={useReducer(
+          cartReducer,
+          JSON.parse(localStorage.getItem("cart")) || []
+        )}
+      >
         <Header
           disableSearch={isSavedOnlyMode}
           handleSearch={handleSearch}
