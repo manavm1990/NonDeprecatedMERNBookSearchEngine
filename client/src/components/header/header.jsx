@@ -30,7 +30,9 @@ export default function Header({ disableSearch, handleSearch, handleSwitch }) {
             </Button>
           ) : (
             <Button
-              onClick={() => setIsShowingRegisterLogin(true)}
+              onClick={() => {
+                setIsShowingRegisterLogin(true);
+              }}
               className="ms-auto"
             >
               Login/Register
