@@ -5,11 +5,13 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Stack from "react-bootstrap/esm/Stack";
+import Cart from "./cart/cart";
 import RegisterLogin from "./register-login/register-login";
 import SearchBar from "./search-bar";
 
 export default function Header({ disableSearch, handleSearch, handleSwitch }) {
   const [isShowingRegisterLogin, setIsShowingRegisterLogin] = useState(false);
+  const [isShowingCart, setIsShowingCart] = useState(false);
   const currentUser = useContext(AuthContext);
 
   return (
@@ -18,16 +20,25 @@ export default function Header({ disableSearch, handleSearch, handleSwitch }) {
         <Stack direction="horizontal">
           <h1 className="text-white">Search For 📚</h1>
           {currentUser ? (
-            <Button
-              variant="danger"
-              className="ms-auto"
-              onClick={() => {
-                localStorage.removeItem("token");
-                window.location.assign("/");
-              }}
-            >
-              Logout
-            </Button>
+            <div className="ms-auto">
+              <Button
+                className="me-4"
+                onClick={() => {
+                  setIsShowingCart(true);
+                }}
+              >
+                🛒 View Cart
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  window.location.assign("/");
+                }}
+              >
+                Logout
+              </Button>
+            </div>
           ) : (
             <Button
               onClick={() => {
@@ -62,6 +73,8 @@ export default function Header({ disableSearch, handleSearch, handleSwitch }) {
           setIsShowingRegisterLogin(false);
         }}
       />
+
+      <Cart isShowing={isShowingCart} hide={() => setIsShowingCart(false)} />
     </>
   );
 }
