@@ -1,4 +1,6 @@
 import { useQuery } from "@apollo/client";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import { index } from "./api";
@@ -7,6 +9,8 @@ import Header from "./components/header/header";
 import AuthContext from "./context";
 import { CURRENT_USER } from "./schema/queries";
 import { normalizeBook } from "./utils";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export default function App() {
   const [foundBooks, setFoundBooks] = useState([]);
@@ -42,7 +46,9 @@ export default function App() {
             : "Login or Register to Start Saving 📚"}
         </h2>
         {!isSavedOnlyMode && foundBooks.length ? (
-          <BooksContainer foundBooks={foundBooks} />
+          <Elements stripe={stripePromise}>
+            <BooksContainer foundBooks={foundBooks} />
+          </Elements>
         ) : null}
         {isSavedOnlyMode && data?.currentUser?.books.length ? (
           <BooksContainer foundBooks={data.currentUser.books} />
