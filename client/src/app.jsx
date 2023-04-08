@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import { index } from "./api";
 import BooksContainer from "./components/books-container/books-container";
 import Header from "./components/header/header";
-import AuthContext from "./context";
+import AuthContext from "./context/auth-context";
 import { CURRENT_USER } from "./schema/queries";
 import { normalizeBook } from "./utils";
 
