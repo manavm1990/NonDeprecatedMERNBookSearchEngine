@@ -24,6 +24,7 @@ export const normalizeBook = (googleBook) => {
       description,
       imageLinks: { thumbnail: image },
     },
+    saleInfo: { retailPrice },
   } = googleBook;
 
   return {
@@ -33,5 +34,8 @@ export const normalizeBook = (googleBook) => {
     image,
     link,
     title,
+
+    // It's only used for 🛒 (not GraphQL 📖 saving 💾)
+    price: retailPrice?.amount,
   };
 };
