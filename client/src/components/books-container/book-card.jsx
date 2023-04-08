@@ -1,9 +1,13 @@
+import cartContext from "@/contexts/cart-context";
 import PropTypes from "prop-types";
+import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
 export default function BookCard({ book, isSaved, currentUser, handleClick }) {
+  const [state, dispatch] = useContext(cartContext);
+
   return (
     <Card>
       <Card.Img variant="top" src={book.image} />
@@ -19,7 +23,11 @@ export default function BookCard({ book, isSaved, currentUser, handleClick }) {
       </ListGroup>
       <Card.Body>
         {book.price ? (
-          <Button variant="success" className="float-start">
+          <Button
+            variant="success"
+            className="float-start"
+            onClick={() => dispatch({ type: "ADD_BOOK", payload: book })}
+          >
             🛒 Buy for {book.price}
           </Button>
         ) : (
