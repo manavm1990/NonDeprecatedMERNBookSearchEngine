@@ -17,14 +17,14 @@ export default function CartDetails() {
               <strong>{book.title}</strong>&nbsp;-&nbsp;{book.quantity}
               &nbsp;@&nbsp;$
               {book.price} ={" "}
-              <strong className="text-primary">
+              <strong className="text-info">
                 ${book.quantity * book.price}
               </strong>
             </ListGroup.Item>
 
             <ButtonGroup aria-label="Add/Remove 📚">
               <Button
-                variant="success"
+                variant="primary"
                 onClick={() => {
                   dispatch({ type: "ADD_BOOK", payload: book });
                 }}
@@ -32,7 +32,7 @@ export default function CartDetails() {
                 +
               </Button>
               <Button
-                variant="danger"
+                variant="secondary"
                 onClick={() => {
                   dispatch({ type: "REMOVE_BOOK", payload: book });
                 }}
@@ -43,6 +43,17 @@ export default function CartDetails() {
           </div>
         ))}
       </ListGroup>
+
+      <p className="h4 text-info-emphasis text-end mt-4">
+        Grand Total: $
+        {state.reduce((total, currBook) => {
+          return total + currBook.quantity * currBook.price;
+        }, 0)}
+      </p>
+
+      <Button variant="success" className="w-100 mt-4">
+        Checkout
+      </Button>
     </div>
   );
 }
