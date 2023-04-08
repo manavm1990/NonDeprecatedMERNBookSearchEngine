@@ -10,4 +10,5 @@ export default {
   mongoURL: process.env.MONGO_URL || "mongodb://localhost:27017/books",
   port: Number.parseInt(process.env.PORT) || 4000,
   saltRounds: process.env.SALT_ROUNDS || 10,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
 };

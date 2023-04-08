@@ -6,7 +6,7 @@ import express from "express";
 import http from "http";
 import config from "./config.js";
 import { resolvers, typeDefs } from "./graphql/index.js";
-import { decodeToken } from "./middleware.js";
+import { decodeToken, handlePayment } from "./middleware.js";
 
 const { port } = config;
 
@@ -27,6 +27,8 @@ async function init() {
   // Note you must call `server.start()` on the `ApolloServer`
   // instance before passing the instance to `expressMiddleware`
   await server.start();
+
+  app.use("/payment", cors(), express.json(), handlePayment);
 
   // Specify the path where we'd like to mount our server
   app.use(

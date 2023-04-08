@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import config from "./config.js";
+import { createPaymentIntent } from "./utils.js";
 
 export const decodeToken = (req, _, next) => {
   // Split "Bearer <token>" into ["Bearer", "<token>"]
@@ -21,4 +22,14 @@ export const decodeToken = (req, _, next) => {
 
     next();
   }
+};
+
+export const handlePayment = async (req, res) => {
+  const { cart } = req.body;
+
+  const paymentIntent = await createPaymentIntent(cart);
+
+  res.send({
+    clientSecret: paymentIntent.client_secret,
+  });
 };
