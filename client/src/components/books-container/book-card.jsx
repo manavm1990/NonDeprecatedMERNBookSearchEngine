@@ -18,9 +18,15 @@ export default function BookCard({ book, isSaved, currentUser, handleClick }) {
         ))}
       </ListGroup>
       <Card.Body>
-        <Card.Link href={book.link} target="_blank" rel="noopener">
-          View Details on Google 📚
-        </Card.Link>
+        {book.price ? (
+          <Button variant="success" className="float-start">
+            🛒 Buy for {book.price}
+          </Button>
+        ) : (
+          <Card.Link href={book.link} target="_blank" rel="noopener">
+            View Details on Google 📚
+          </Card.Link>
+        )}
         {currentUser && (
           <Button
             variant={isSaved ? "warning" : "secondary"}
@@ -47,6 +53,7 @@ BookCard.propTypes = {
     image: PropTypes.string,
     link: PropTypes.string,
     title: PropTypes.string,
+    price: PropTypes.number,
   }).isRequired,
   isSaved: PropTypes.bool,
 
