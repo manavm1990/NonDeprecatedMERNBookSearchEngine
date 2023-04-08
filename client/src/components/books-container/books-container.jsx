@@ -1,4 +1,4 @@
-import AuthContext from "@/context";
+import AuthContext from "@/contexts/auth-context";
 import { REMOVE_BOOK, SAVE_BOOK } from "@/schema/mutations";
 import { CURRENT_USER } from "@/schema/queries";
 import { useMutation } from "@apollo/client";

@@ -1,4 +1,4 @@
-import AuthContext from "@/context";
+import AuthContext from "@/contexts/auth-context";
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
