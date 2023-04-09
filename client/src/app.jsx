@@ -1,17 +1,13 @@
 import { useQuery } from "@apollo/client";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { useReducer, useState } from "react";
 import Container from "react-bootstrap/Container";
-import { index } from "./api";
+import { indexGoogleBooks } from "./api";
 import BooksContainer from "./components/books-container/books-container";
 import Header from "./components/header/header";
 import AuthContext from "./contexts/auth-context";
 import CartContext, { cartReducer } from "./contexts/cart-context";
 import { CURRENT_USER } from "./schema/queries";
 import { normalizeBook } from "./utils";
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export default function App() {
   const [foundBooks, setFoundBooks] = useState([]);
@@ -25,7 +21,7 @@ export default function App() {
 
     // GoogleBooks API puts the results in 'items'
     // Rename this to 📚
-    const { items: books } = await index(query);
+    const { items: books } = await indexGoogleBooks(query);
 
     setFoundBooks(books.map(normalizeBook));
   };
@@ -56,9 +52,7 @@ export default function App() {
               : "Login or Register to Start Saving 📚"}
           </h2>
           {!isSavedOnlyMode && foundBooks.length ? (
-            <Elements stripe={stripePromise}>
-              <BooksContainer foundBooks={foundBooks} />
-            </Elements>
+            <BooksContainer foundBooks={foundBooks} />
           ) : null}
           {isSavedOnlyMode && data?.currentUser?.books.length ? (
             <BooksContainer foundBooks={data.currentUser.books} />

@@ -15,13 +15,13 @@ export const indexGoogleBooks = async (q) => {
   return response.json();
 };
 
-export const createPaymentIntent = async (cart) => {
+export const getClientSecret = async (cart) => {
   const response = await fetch(BASE_PAYMENT_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(cart),
+    body: JSON.stringify({ cart }),
   });
 
   if (!response.ok) {

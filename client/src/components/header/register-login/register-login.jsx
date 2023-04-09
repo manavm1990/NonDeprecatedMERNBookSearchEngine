@@ -14,7 +14,10 @@ export default function RegisterLogin({ isShowing, hide }) {
     useMutation(LOGIN, {
       onCompleted(data) {
         localStorage.setItem("token", data.login.token);
-        hide();
+
+        // TODO: Save 🛒 in database and include it with the token
+        localStorage.removeItem("cart");
+
         loginClient.resetStore();
       },
     });

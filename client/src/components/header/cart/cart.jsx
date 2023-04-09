@@ -1,7 +1,7 @@
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import CartDetails from "./cart-details";
 import PropTypes from "prop-types";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import CartDetails from "./cart-details/cart-details";
 
 export default function Cart({ isShowing, hide }) {
   return (
