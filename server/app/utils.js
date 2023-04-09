@@ -30,9 +30,6 @@ export const handleError = (error, code = "INTERNAL_SERVER_ERROR") => {
 };
 
 export const createPaymentIntent = (cart) => {
-  console.log("Creating payment intent...");
-  console.log("Cart:", cart);
-  console.log("Total:", calculateCartTotal(cart));
   return stripe.paymentIntents.create({
     amount: calculateCartTotal(cart),
     currency: "usd",
