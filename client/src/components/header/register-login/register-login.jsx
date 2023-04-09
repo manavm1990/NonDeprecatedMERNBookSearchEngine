@@ -15,9 +15,9 @@ export default function RegisterLogin({ isShowing, hide }) {
       onCompleted(data) {
         localStorage.setItem("token", data.login.token);
 
-        // TODO: Save 🛒 in database and include it with the token
+        // TODO: Save 🛒 in database and include it with the token instead of resetting on login.
         localStorage.removeItem("cart");
-
+        hide();
         loginClient.resetStore();
       },
     });
